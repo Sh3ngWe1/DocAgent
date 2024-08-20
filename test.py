@@ -11,9 +11,9 @@ import os
 
 load_dotenv()
 
-os.environ["mongo_uri"] = os.getenv("mongo_uri")
-os.environ["azuredoc_endpoint"] = os.getenv("azuredoc_endpoint")
-os.environ["azuredoc_apikey"] = os.getenv("azuredoc_apikey")
+os.environ["MONGO_URI"] = os.getenv("MONGO_URI")
+os.environ["AZUREDOC_ENDPOINT"] = os.getenv("AZUREDOC_ENDPOINT")
+os.environ["AZUREDOC_APIKEY"] = os.getenv("AZUREDOC_APIKEY")
 
 def check_rule_by_supplier_name(collection, supplier_name):
     query = {"supplier_name": supplier_name}
@@ -29,14 +29,14 @@ def connect_to_mongo(uri, db_name, collection_name):
     collection = db[collection_name]
     return collection
 
-mongo_uri = os.environ["mongo_uri"]
+mongo_uri = os.environ["MOMGO_URI"]
 database_name = "test"
 collection_name = "rules"
 collection = connect_to_mongo(mongo_uri, database_name, collection_name)
 
 # Azure AI Document Intelligence 認證資訊 (請替換為您的資訊)
-azuredoc_endpoint = os.environ["azuredoc_endpoint"]
-azuredoc_apikey = os.environ["azuredoc_apikey"]
+azuredoc_endpoint = os.environ["AZUREDOC_ENDPOINT"]
+azuredoc_apikey = os.environ["AZUREDOC_APIKEY"]
 file_path = "./doc/上誼3.docx"
 
 # 使用 Azure AI Document Intelligence Loader 載入文件

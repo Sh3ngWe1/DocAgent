@@ -10,8 +10,12 @@ import os
 
 load_dotenv()
 
-azuredoc_endpoint = os.environ["azuredoc_endpoint"]
-azuredoc_apikey = os.environ["azuredoc_apikey"]
+os.environ["MONGO_URI"] = os.getenv("MONGO_URI")
+os.environ["AZUREDOC_ENDPOINT"] = os.getenv("AZUREDOC_ENDPOINT")
+os.environ["AZUREDOC_APIKEY"] = os.getenv("AZUREDOC_APIKEY")
+
+azuredoc_endpoint = os.environ["AZUREDOC_ENDPOINT"]
+azuredoc_apikey = os.environ["AZUREDOC_APIKEY"]
 file_path = "./doc/上誼3.docx"
 loader1 = AzureAIDocumentIntelligenceLoader(
     api_endpoint=azuredoc_endpoint, api_key=azuredoc_apikey, file_path=file_path, api_model="prebuilt-layout"
