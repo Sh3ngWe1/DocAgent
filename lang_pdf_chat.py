@@ -27,7 +27,7 @@ documents = loader1.load()
 #loader = file_path.endswith(".pdf") and PyPDFLoader(file_path) or TextLoader(file_path)
 
 # 選擇 splitter 並將文字切分成多個 chunk 
-splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=0) 
+splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0) 
 texts = loader1.load_and_split(splitter)
 
 # 建立本地 db
@@ -35,7 +35,7 @@ embeddings = OllamaEmbeddings(model= "llama3.1:latest")
 vectorstore = Chroma.from_documents(texts, embeddings)
 
 # 對話 chain
-qa = ConversationalRetrievalChain.from_llm(ChatOllama(model="llama3.1:latest", temperature=0), vectorstore.as_retriever())
+qa = ConversationalRetrievalChain.from_llm(ChatOllama(model="llama3.1:latest", temperature=0), texts[0].page_content)
 chat_history = []
 while True:
     query = input('\nQ: ') 
